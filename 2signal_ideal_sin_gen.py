@@ -16,7 +16,9 @@ samprate = symrate * samplpersym #      2 * 4
 time = 1/samprate * np.arange(int(samprate * duration)) #
 timeError=.002
 
-signal=.5 * np.sin((2 * np.pi * symrate * time) + ((2*np.pi)/6)) + .5 # shifting plane to positive adding .5
+signal=.5 * np.sin((2 * np.pi * symrate * time) + ((2*np.pi)/2)) + .5 # shifting plane to positive adding .5
+signal2=.5 * np.sin((2 * np.pi * symrate * time) + ((np.pi)/4)) + .5 # shifting plane to positive adding .5
+
 #((np.pi)/2)) is phase difference added on purpose to time errpr detection
 #print(signal)
 print(signal)
@@ -36,4 +38,5 @@ print(stdout.decode("utf-8")) # convert Python bytes object to String
 
 
 plt.plot(time, signal, marker="s")
+plt.plot(time, signal2, marker="x")
 plt.show()

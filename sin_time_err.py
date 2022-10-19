@@ -26,7 +26,7 @@ for num in range(1,no_signal):
 #((np.pi)/2)) is phase difference added on purpose to time errpr detection
 #print(signal)
     #print(signal)
-    print(f'\n\nthe signal with phase diff of',math.degrees(np.pi/num))
+    print(f'\n\nthe signal with phase diff of',math.degrees(num*2*np.pi/no_signal))
     proc = subprocess.Popen([
         "C:\\Users\Karthik Lokesh\\Desktop\\Proj_Arb\\generate\\wrp\\time_error.exe", "%f" % (samprate)],
         stdout=subprocess.PIPE, stdin=subprocess.PIPE)
