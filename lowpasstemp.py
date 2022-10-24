@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 
 def butter_lowpass(cutoff, fs, order=5):
-    nyq = 0.5 * fs # Nyquist Frequency
+    nyq = 0.5 * fs
     normal_cutoff = cutoff / nyq
     b, a = butter(order, normal_cutoff, btype='low', analog=False)
     return b, a
@@ -16,9 +16,9 @@ def butter_lowpass_filter(data, cutoff, fs, order=5):
 
 
 # Setting standard filter requirements.
-order = 10 # sin wave can be approx represented as quadratic, symb rate
-fs = 600.0     # total no. of samples 
-cutoff = 3.667  # desired cutoff frequency of the filter, Hz ,      slightly higher than actual 1.2 Hz
+order = 6
+fs = 30.0       
+cutoff = 3.667  
 
 b, a = butter_lowpass(cutoff, fs, order)
 
@@ -35,21 +35,12 @@ plt.grid()
 
 
 # Creating the data for filteration
-symrate = 6 #freq or symbol rate (for a duration [1 here] how many symbol are generated)
-#cutoffrq = symrate
-samplpersym = 100 #(how many samples to be considered for per symbol)
-duration = 1 # within this time entire signal should be processed
-samprate = symrate * samplpersym #T = 5.0  
-T = 1.0       # value taken in seconds
+T = 5.0         # value taken in seconds
 n = int(T * fs) # indicates total samples
 t = np.linspace(0, T, n, endpoint=False)
-symb = [-1,1,-1,1,1,-1]
-data = np.ndarray(600, dtype=float) # 600= 6 symbol and 100 samples per symbol 
 
-for i in range(len(symb)):
-    data[i*100:100*(i+1)] = symb[i]
-#data = np.sin(1.2*2*np.pi*t) + 1.5*np.cos(9*2*np.pi*t) + 0.5*np.sin(12.0*2*np.pi*t)
-print(data)
+data = np.sin(1.2*2*np.pi*t) + 1.5*np.cos(9*2*np.pi*t) + 0.5*np.sin(12.0*2*np.pi*t)
+
 # Filtering and plotting
 y = butter_lowpass_filter(data, cutoff, fs, order)
 

@@ -22,9 +22,8 @@ digi = np.ndarray(600, dtype=float) # 600= 6 symbol and 100 samples per symbol
 for i in range(len(symb)):
     digi[i*100:100*(i+1)] = symb[i]
 
-
 print(digi)
 #print(x_axis)
-plt.plot(np.ndarray(600, dtype=float), digi , marker="s")
-
+#plt.plot(np.ndarray(600, dtype=float), digi , marker="s")
+plt.stem(digi) # works fine
 plt.show()
