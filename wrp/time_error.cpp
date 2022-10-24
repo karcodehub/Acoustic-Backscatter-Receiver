@@ -28,7 +28,7 @@ std::string line;       //declaring a varb that gets value from console std i/o,
     
   //  int samprate=8;*/
     float* signal = new float[samprate]; 
-    //printf(" val of signal  ");
+   // printf(" val of signal  ");
     for(int loop=0;loop<samprate; loop++)
     {
         scanf("%f",&signal[loop]);

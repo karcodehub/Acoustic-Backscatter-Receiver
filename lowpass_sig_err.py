@@ -50,20 +50,20 @@ for sample in sampled_data:
 
 stdout, stderr = proc.communicate(bytes) # wrtings argument to std in to C prog, then wait till excu of process, ret to py.
 
-output=(stdout.decode("utf-8")) # convert Python bytes object to String
-print(stdout)
+#output=(stdout.decode("utf-8")) # convert Python bytes object to String
+#print(stdout)
 er = stdout.split(b"\t")
    
-error= float(er[-1])
+#error= float(er[-1])
     
-print(float(er[-1]))
-err=struct.unpack('b','byt')
-print(err)
+print((er[-1]))
+#err=struct.unpack('b','byt')
+#print(err)
 #y_axis[num]=error
 #x_axis[num] = num*360/no_signal
     #mul_error[num]=output[-1]
 
 #print(y_axis)
 #print(x_axis)
-#plt.plot(sampled_data)
-plt.show()
+#plt.plot(er)
+#plt.show()

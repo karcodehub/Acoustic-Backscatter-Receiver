@@ -25,7 +25,7 @@ float time_error(float signal[], int samprate)
   
    }*/
  //calculating slope*ample for 1st symbol 4th sample
- for(loop=1;loop<samprate-1;loop+3) // loop=0 we cant cal slope of 1st sample, loop+3 -> slope of every 4th sample one per symb
+ for(loop=1;loop<samprate-1;loop+=4) // loop=0 we cant cal slope of 1st sample, loop+3 -> slope of every 4th sample one per symb
 {
 
   slope[loop] = (signal[loop+1]- signal[loop-1]);
