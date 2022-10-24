@@ -18,7 +18,7 @@ def butter_lowpass_filter(data, cutoff, fs, order=5):
 # Setting standard filter requirements.
 order = 10 # sin wave can be approx represented as quadratic, symb rate
 fs = 600.0     # total no. of samples 
-cutoff = 3.667  # desired cutoff frequency of the filter, Hz ,      slightly higher than actual 1.2 Hz
+cutoff =6   # desired cutoff frequency of the filter, Hz , prev=3.667      slightly higher than actual 1.2 Hz
 
 b, a = butter_lowpass(cutoff, fs, order)
 

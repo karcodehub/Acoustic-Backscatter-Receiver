@@ -40,7 +40,7 @@ n = int(T * fs) # indicates total samples
 t = np.linspace(0, T, n, endpoint=False)
 
 data = np.sin(1.2*2*np.pi*t) + 1.5*np.cos(9*2*np.pi*t) + 0.5*np.sin(12.0*2*np.pi*t)
-
+print(data)
 # Filtering and plotting
 y = butter_lowpass_filter(data, cutoff, fs, order)
 

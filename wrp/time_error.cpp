@@ -28,15 +28,16 @@ std::string line;       //declaring a varb that gets value from console std i/o,
     
   //  int samprate=8;*/
     float* signal = new float[samprate]; 
-    //printf(" val of signal\n");
+    //printf(" val of signal  ");
     for(int loop=0;loop<samprate; loop++)
     {
         scanf("%f",&signal[loop]);
     }
-    for(int loop2=0;loop2<samprate; loop2++)
+
+    /*for(int loop2=0;loop2<samprate; loop2++)
     {
-     printf("%f \t",signal[loop2]);
-    }
+     printf("%f ",signal[loop2]);
+    }*/
      time_error(signal,samprate);
 }
 
