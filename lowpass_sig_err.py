@@ -42,6 +42,7 @@ for i in range(len(symb)):
 y = butter_lowpass_filter(data, cutoff, fs, order)
 
 sampled_data = y[0::25]
+print(len(sampled_data))
 proc = subprocess.Popen([
     "C:\\Users\Karthik Lokesh\\Desktop\\Proj_Arb\\generate\\wrp\\time_error.exe", "%f" % (len(sampled_data))],
     stdout=subprocess.PIPE, stdin=subprocess.PIPE)
@@ -52,19 +53,21 @@ for sample in sampled_data:
     bytes += b"%f\n" % (np.real(sample)) # each sample of symbol type converting it to float and sending it in bytes (instead of string)
 
 stdout, stderr = proc.communicate(bytes) # wrtings argument to std in to C prog, then wait till excu of process, ret to py.
-print(stdout)
+#print(stdout)
 print(type(stdout))
+print(len(stdout))
 output=(stdout.decode("utf-8")) # convert Python bytes object to String
 #output.split(',',6)
 print(type(output))
-print(output)
+#print(output)
 #float_op= atof(output)
-print(float(output[-1]))
+#print(float(output[-1]))
 output_fl = []
-sub=7
-for index in range(11, len(output),sub):
-    output_fl.append(output[index:index+sub])
-print(output_fl)
+print(type(output))
+print(len(output))
+output_fl=(output.split())
+
+print([float(x) for x in output_fl])
 #print(type(float_op))
 #for i in symb:
     #print(float_op[i])

@@ -14,7 +14,9 @@ int main(int argc, char **argv)
         return EXIT_FAILURE;
     }
 
-int samprate = atoi(argv[1]); // string val of arguments is conv to int no.1.0, 0.5, 0.0,  0.5, 1.0,  0.5, 0.0,  0.5
+int samprate = atoi(argv[1]); 
+//int prc=0;
+// string val of arguments is conv to int no.1.0, 0.5, 0.0,  0.5, 1.0,  0.5, 0.0,  0.5
 //float samples_rate[25], signal[25]; float slope[25];
 /*int loop_var_1;
 
@@ -34,10 +36,11 @@ std::string line;       //declaring a varb that gets value from console std i/o,
         scanf("%f",&signal[loop]);
     }
 
-    /*for(int loop2=0;loop2<samprate; loop2++)
-    {
-     printf("%f ",signal[loop2]);
+   /* for(int loop2=0;loop2<samprate; loop2++)
+    { //prc++;
+     //printf("%f ",signal[loop2]);
     }*/
+    //printf("val of no. signal %d",prc );
      time_error(signal,samprate);
 }
 

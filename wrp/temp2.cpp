@@ -7,7 +7,7 @@ using namespace std;
 float time_error(float signal[], int samprate)
 {
      
-    int loop;
+    int loop, count=0;
     float* slope =new float[samprate]; //val of samprate will be know dynamical so the array is created dynamically 
     float* slp_amp = new float [samprate]; 
     //printf("%f array", sizeof(signal));
@@ -25,17 +25,20 @@ float time_error(float signal[], int samprate)
   
    }*/
  //calculating slope*ample for 1st symbol 4th sample
- for(loop=1;loop<samprate-1;loop+=4) // loop=0 we cant cal slope of 1st sample, loop+3 -> slope of every 4th sample one per symb
+ //for(loop=1;loop<samprate-1;loop+=4) // loop=0 we cant cal slope of 1st sample, loop+3 -> slope of every 4th sample one per symb
+for(loop=1;loop<samprate-1;loop+=4)
 {
-
+  //count++;
   slope[loop] = (signal[loop+1]- signal[loop-1]);
        //cout << "\n\n slope of " << loop+1 << "th sample  is \t" <<signal[loop+1] << "-" <<signal[loop-1]<<"=" << slope[loop] <<"\n";
        
        slp_amp[loop] = (slope[loop] * signal[loop]);
        //cout << "\n slope amplitudde of  " << loop+1 << "th sample  is \t" <<slope[loop] << "*" <<signal[loop]<<"=" << slp_amp[loop] <<"\n\n\n";
         //cout << slp_amp[loop];
+        
         printf("%9.5f",slp_amp[loop]);
  }
+ //printf("no. of sample process is %d", count);
  
   return 0;
 }
