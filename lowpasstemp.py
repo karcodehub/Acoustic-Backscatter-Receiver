@@ -1,10 +1,15 @@
+from locale import atof
+import math
+import struct
 import numpy as np
+import subprocess
 from scipy.signal import butter, lfilter, freqz
 import matplotlib.pyplot as plt
 
 
+
 def butter_lowpass(cutoff, fs, order=5):
-    nyq = 0.5 * fs
+    nyq = 0.5 * fs # Nyquist Frequency
     normal_cutoff = cutoff / nyq
     b, a = butter(order, normal_cutoff, btype='low', analog=False)
     return b, a
@@ -14,42 +19,70 @@ def butter_lowpass_filter(data, cutoff, fs, order=5):
     y = lfilter(b, a, data)
     return y
 
-
 # Setting standard filter requirements.
-order = 6
-fs = 30.0       
-cutoff = 3.667  
+order = 10 # sin wave can be approx represented as quadratic, symb rate
+fs = 600.0     # total no. of samples 
+cutoff = 6  # desired cutoff frequency of the filter, Hz ,      slightly higher than actual 1.2 Hz
 
 b, a = butter_lowpass(cutoff, fs, order)
 
-# Plotting the frequency response.
-w, h = freqz(b, a, worN=8000)
-plt.subplot(2, 1, 1)
-plt.plot(0.5*fs*w/np.pi, np.abs(h), 'b')
-plt.plot(cutoff, 0.5*np.sqrt(2), 'ko')
-plt.axvline(cutoff, color='k')
-plt.xlim(0, 0.5*fs)
-plt.title("Lowpass Filter Frequency Response")
-plt.xlabel('Frequency [Hz]')
-plt.grid()
 
-
-# Creating the data for filteration
-T = 5.0         # value taken in seconds
+# generate Signal for input
+T = 1.0       # value taken in seconds
 n = int(T * fs) # indicates total samples
 t = np.linspace(0, T, n, endpoint=False)
+symb = [-1,1,-1,1,1,-1,1,-1,-1,1]
+data = np.ndarray(600, dtype=float) # 600= 6 symbol and 100 samples per symbol 
+sampled_data = np.ndarray(25, dtype=float)
 
-data = np.sin(1.2*2*np.pi*t) + 1.5*np.cos(9*2*np.pi*t) + 0.5*np.sin(12.0*2*np.pi*t)
-print(data)
+for i in range(len(symb)):
+    data[i*100:100*(i+1)] = symb[i]
+
 # Filtering and plotting
 y = butter_lowpass_filter(data, cutoff, fs, order)
 
-plt.subplot(2, 1, 2)
-plt.plot(t, data, 'b-', label='data')
-plt.plot(t, y, 'g-', linewidth=2, label='filtered data')
-plt.xlabel('Time [sec]')
-plt.grid()
-plt.legend()
+sampled_data = y[0::25]
+proc = subprocess.Popen([
+    "C:\\Users\Karthik Lokesh\\Desktop\\Proj_Arb\\generate\\wrp\\time_error.exe", "%f" % (len(sampled_data))],
+    stdout=subprocess.PIPE, stdin=subprocess.PIPE)
 
-plt.subplots_adjust(hspace=0.35)
-plt.show()
+# Generate Input
+bytes = b""
+for sample in sampled_data:
+    bytes += b"%f\n" % (np.real(sample)) # each sample of symbol type converting it to float and sending it in bytes (instead of string)
+
+stdout, stderr = proc.communicate(bytes) # wrtings argument to std in to C prog, then wait till excu of process, ret to py.
+print(stdout)
+print(type(stdout))
+output=(stdout.decode("utf-8")) # convert Python bytes object to String
+
+print(type(output))
+output_fl=(output.split())
+print([float(x) for x in output_fl])
+#float_op= atof(output)
+#print(float(output[-1]))
+#output_fl = []
+#sub=7
+#for index in range(11, len(output),sub):
+ #   output_fl.append(output[index:index+sub])
+#print(output_fl)
+#print(type(float_op))
+#for i in symb:
+    #print(float_op[i])
+
+#er = stdout.split(b"\t")
+   
+#error= float(er[-1])
+    
+#print((er[-1]))
+#err=struct.unpack('b',b'5.0817e-0080.6709371.01240.9985311.000520.20916')
+#print(err)
+#print(error)
+#y_axis=error
+#x_axis = 360/sampled_data
+    #mul_error[num]=output[-1]
+
+#print(y_axis)
+#print(x_axis)
+#plt.plot(x_axis, y_axis , marker="s")
+#plt.show()

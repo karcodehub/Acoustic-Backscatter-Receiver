@@ -33,7 +33,8 @@ float time_error(float signal[], int samprate)
        
        slp_amp[loop] = (slope[loop] * signal[loop]);
        //cout << "\n slope amplitudde of  " << loop+1 << "th sample  is \t" <<slope[loop] << "*" <<signal[loop]<<"=" << slp_amp[loop] <<"\n\n\n";
-        cout << slp_amp[loop];
+        //cout << slp_amp[loop];
+        printf("%9.5f",slp_amp[loop]);
  }
  
   return 0;

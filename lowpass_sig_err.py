@@ -1,9 +1,12 @@
+from locale import atof
 import math
 import struct
 import numpy as np
 import subprocess
 from scipy.signal import butter, lfilter, freqz
 import matplotlib.pyplot as plt
+
+
 
 def butter_lowpass(cutoff, fs, order=5):
     nyq = 0.5 * fs # Nyquist Frequency
@@ -49,21 +52,36 @@ for sample in sampled_data:
     bytes += b"%f\n" % (np.real(sample)) # each sample of symbol type converting it to float and sending it in bytes (instead of string)
 
 stdout, stderr = proc.communicate(bytes) # wrtings argument to std in to C prog, then wait till excu of process, ret to py.
+print(stdout)
+print(type(stdout))
+output=(stdout.decode("utf-8")) # convert Python bytes object to String
+#output.split(',',6)
+print(type(output))
+print(output)
+#float_op= atof(output)
+print(float(output[-1]))
+output_fl = []
+sub=7
+for index in range(11, len(output),sub):
+    output_fl.append(output[index:index+sub])
+print(output_fl)
+#print(type(float_op))
+#for i in symb:
+    #print(float_op[i])
 
-#output=(stdout.decode("utf-8")) # convert Python bytes object to String
-#print(stdout)
 er = stdout.split(b"\t")
    
 #error= float(er[-1])
     
-print((er[-1]))
-#err=struct.unpack('b','byt')
+#print((er[-1]))
+#err=struct.unpack('b',b'5.0817e-0080.6709371.01240.9985311.000520.20916')
 #print(err)
-#y_axis[num]=error
-#x_axis[num] = num*360/no_signal
+#print(error)
+#y_axis=error
+#x_axis = 360/sampled_data
     #mul_error[num]=output[-1]
 
 #print(y_axis)
 #print(x_axis)
-#plt.plot(er)
+#plt.plot(x_axis, y_axis , marker="s")
 #plt.show()
