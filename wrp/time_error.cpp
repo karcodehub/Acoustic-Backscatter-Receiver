@@ -15,6 +15,10 @@ int main(int argc, char **argv)
     }
 
 int samprate = atoi(argv[1]); 
+//printf("val of no. 1st %s ",argv[0]);
+//%s<->argv[0] --> C:\\Users\\Karthik Lokesh\\Desktop\\Proj_Arb\\generate\\wrp\\time_error.exe 
+//%s<->argv[1] --> 400.000000 and then 399.000000 and 398.000000 
+//%s<->argv[2] --> null
 //int prc=0;
 // string val of arguments is conv to int no.1.0, 0.5, 0.0,  0.5, 1.0,  0.5, 0.0,  0.5
 //float samples_rate[25], signal[25]; float slope[25];

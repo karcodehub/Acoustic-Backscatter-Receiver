@@ -73,7 +73,8 @@ output_fl=(output.split())
 plot_fl = []
 
 plot_fl = [float(x) for x in output_fl]
-print(plot_fl)
+print(type(plot_fl))
+print((sum(plot_fl) / len(plot_fl)))
 #print([float(x) for x in output_fl])
 
 #float_op= atof(output)
