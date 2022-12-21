@@ -1,0 +1,21 @@
+Motivation:
+Communication is sending information from one place to another through a medium of transmission. In today’s dynamic world transmission medium is air (or vacuum) because of its Omni presence, versatility and mobility that leads to ‘wireless communication’. In wireless communication information exchanged through ‘signals’. A signal is an electrical impulse or electro-magnetic wave that consists of information or instruction sent (transmitter) and derived information to use by received (receiver) is most economical way of communication.
+There are many complex process involved to wireless data communication, (1) starting with sequencing the meaning full data in a correct order.  (2) Channeling encoding is addition of few extra bits to enhance the integration and protection of data in various ways. (3) Symbol mapping is assigning a symbol to each data, converting the digital binary bits data, i.e 0’s or 1’s into continuous analog data because 1’s might require infinite or large bandwidth which is not feasible, series of symbol together form a signal.  (4)Modulation is a technique that describe the most suitable method of preparation of analog data signals to transmitting signal by superimposing with high-frequency carrier signal. Based on requirement and location of transceiver frequency, phase, amplitude and OFDM modulation methods are employed. Finally the high frequency signals are transmitted into atmosphere and propagate in electro-magnetic wave.
+The transmitted signals in open space might undergo high degradations like Diffraction that bends the direction of signals hitting on sharp edges, Reflection rebounding of signals, Scattering is splitting of signal due to change in impedance, Pathloss is attenuation of signal power during propagation and also other signals might interact/influence to cause interference with transmitted signal. All these differently affected signals travel two or more paths that causes multipath propagation at receiver.
+The transmitted signal comes to receiver and numerous challenges is posed. The receiver needs to reverse all processes by transmitter Tx and starting with demodulating the signal. Now the baseband signal (without carrier signal) is in analog from and it has to be converted into digital binary bits 0’s and 1’s for meaningful information. In order to transform we need to solve few challenges that this project mainly focused on and let’s discuss this in detail.
+
+(1) The receiver (Rx) doesn’t have any prior information about the signals starting point as signal is continuous in nature. Demodulated signal not only contains data rather it has encoding bits for error correction and error detections and presence of preamble as initials of a signal.  
+(2) Rx do not have knowledge on symbol starting point in a signal. This is crucial because an entire signal should be divided into numerous independent individual symbols. Rx samples the signal in equal interval of time to get symbol, so incorrect starting point yields incomplete symbols. 
+(3)Rx is not aware about the peak value of symbol so sampling at that exact point gives better estimation results on value of symbols either 0 or 1. In practical more than one sample is considered for one sample to estimate the value of symbol and as number of sample increases accuracy increases along with computational complexity.
+
+This is known as Synchronization problem, meaning that transmitter Tx clock is not synchronized with receiver Rx clock. Thinking on solution to send transmitter clock along with data in Tx waveform as data at the In-Phase channel and clock at the quadrature channel in the Quadrature amplitude modulation so Rx will have all required information about starting of signal and symbol boundaries to sample at exact peak values. In practical it is not at all feasible because clock occupies precious bandwidth that can be used to send more useful information. Power and other resources are also consumed by sending clock could have be diverted to more beneficial. Moreover new techniques has to be devised to extract Tx clock from the noisy received data signal.     
+
+
+
+
+
+
+
+
+
+
